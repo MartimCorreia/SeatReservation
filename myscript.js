@@ -60,14 +60,9 @@
   });
 
 
-
-
-
-
   alphabet.forEach(letter =>{
     document.getElementById(`${letter}`)
   });
-
 
   function leftSeats(letter){
     for (let i = 1; i < 4; i++) {
@@ -132,87 +127,58 @@
     });
   }
 
+  /*-------------------- Form area---------------*/
 
 
 
 
-    /*-------------------- Form area---------------*/
+  reserveButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    if(selectedSeats.length === 1){
 
-
-
-
-    reserveButton.addEventListener('click', (event) => {
-      event.preventDefault();
-      if(selectedSeats.length === 1){
-
-        formParagraph.innerHTML = `You have selected ${selectedSeats.length} Seat`;
-      }
-      else {
-        formParagraph.innerHTML = `You have selected ${selectedSeats.length} Seats`;
-      }
-      reserveForm.style.display = "block";
-
-    });
-
-
-    hideform.addEventListener('click', (event) => {
-      event.preventDefault();
-      reserveForm.style.display = "none";
-
-    });
-
-
-
-
-    confirmButton.addEventListener('submit', (event) => {
-      event.preventDefault();
-     confirmReservation();
-    });
-    function confirmReservation() {
-
-      const inputs = document.querySelectorAll('input');
-      let recordsCounter = Object.keys(reservedSeats).length + 1;
-
-
-      selectedSeats.forEach((id) => {
-
-        document.getElementById(id).className = "r";
-        document.getElementById(id).innerHTML = "R";
-
-        reservedSeats[`record${recordsCounter++}`] = {
-          seat: id,
-          owner: {
-            fname: inputs[0].value,
-            lname: inputs[1].value
-          }
-        };
-        selectedSeats = [];
-        reserveButton.style.display = "none";
-        document.getElementById('resform').style.display = "none";
-        console.log(reservedSeats);
-      });
-
+      formParagraph.innerHTML = `You have selected ${selectedSeats.length} Seat`;
     }
+    else {
+      formParagraph.innerHTML = `You have selected ${selectedSeats.length} Seats`;
+    }
+    reserveForm.style.display = "block";
+
+  });
 
 
+  hideform.addEventListener('click', (event) => {
+    event.preventDefault();
+    reserveForm.style.display = "none";
+
+  });
+
+  confirmButton.addEventListener('submit', (event) => {
+    event.preventDefault();
+   confirmReservation();
+  });
+  function confirmReservation() {
+
+    const inputs = document.querySelectorAll('input');
+    let recordsCounter = Object.keys(reservedSeats).length + 1;
 
 
+    selectedSeats.forEach((id) => {
 
+      document.getElementById(id).className = "r";
+      document.getElementById(id).innerHTML = "R";
 
+      reservedSeats[`record${recordsCounter++}`] = {
+        seat: id,
+        owner: {
+          fname: inputs[0].value,
+          lname: inputs[1].value
+        }
+      };
+      selectedSeats = [];
+      reserveButton.style.display = "none";
+      document.getElementById('resform').style.display = "none";
+      console.log(reservedSeats);
+    });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  }
 })();
